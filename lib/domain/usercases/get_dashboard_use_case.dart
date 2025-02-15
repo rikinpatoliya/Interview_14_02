@@ -11,6 +11,6 @@ class GetDashboardUseCase
 
   @override
   Future<ApiResponse<LocationResponse>> call({String? params}) {
-    return _userRepository.getLocationList(query: params);
+    return _userRepository.getProductList();
   }
 }

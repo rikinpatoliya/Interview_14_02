@@ -16,6 +16,6 @@ void showProgressDialog(BuildContext context) {
   _progressDialog.show();
 }
 
-void hideProgressDialog() {
+void dismissDialog() {
   _progressDialog.dismiss();
 }

@@ -4,7 +4,7 @@ import 'package:rikin_interview_14_02/domain/entities/response/LocationResponse/
 
 abstract class UserRepository {
   // API Methods
-  Future<ApiResponse<LocationResponse>> getLocationList({String? query});
+  Future<ApiResponse<LocationResponse>> getProductList();
 
   Future<ApiResponse<UserCredential>> logInWithEmailAndPassword(
       {required String username, required String password});

@@ -14,4 +14,7 @@ abstract class UserApiServices {
     @Query("limit") int? limit,
     @Query("searchFields") String? searchFields,
   });
+
+  @GET('category_productV1')
+  Future<LocationResponse> getProductList();
 }

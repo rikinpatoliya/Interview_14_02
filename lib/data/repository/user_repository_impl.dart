@@ -1,30 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:rikin_interview_14_02/core/const/app_const.dart';
 import 'package:rikin_interview_14_02/core/resources/api_response.dart';
 import 'package:rikin_interview_14_02/core/utils/logger.dart';
 import 'package:rikin_interview_14_02/data/data_sources/remote/user_api_services.dart';
-import 'package:rikin_interview_14_02/data/dio/network_exceptions.dart';
+import 'package:rikin_interview_14_02/data/repository/base/base_repository.dart';
 import 'package:rikin_interview_14_02/domain/entities/response/LocationResponse/location_response.dart';
 import 'package:rikin_interview_14_02/domain/repository/user_repository.dart';
 
-class UserRepositoryImpl implements UserRepository {
+class UserRepositoryImpl extends BaseRepository implements UserRepository {
   UserRepositoryImpl(this._userApiService);
 
   final UserApiServices _userApiService;
+
   @override
-  Future<ApiResponse<LocationResponse>> getLocationList({String? query}) async {
-    try {
-      final locationResponse = await _userApiService.getNewsArticles(
-        suggest: query,
-        limit: pageLimit,
-        searchFields: 'new_locations',
-      );
-      return ApiResponse.success(locationResponse);
-    } catch (error) {
-      NetworkExceptions networkExcl = NetworkExceptions.getDioException(error);
-      var message = NetworkExceptions.getErrorMessage(networkExcl);
-      return ApiResponse.error(message);
-    }
+  Future<ApiResponse<LocationResponse>> getProductList() async {
+    return apiCall(
+      request: () => _userApiService.getProductList(),
+    );
   }
 
   @override
