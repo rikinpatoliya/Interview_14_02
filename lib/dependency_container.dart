@@ -4,8 +4,9 @@ import 'package:rikin_interview_14_02/data/data_sources/remote/user_api_services
 import 'package:rikin_interview_14_02/data/dio/dio_provider.dart';
 import 'package:rikin_interview_14_02/data/repository/user_repository_impl.dart';
 import 'package:rikin_interview_14_02/domain/repository/user_repository.dart';
-import 'package:rikin_interview_14_02/domain/usercases/get_dashboard_use_case.dart';
+import 'package:rikin_interview_14_02/presentation/cart_detail/cart_detail_cubit.dart';
 import 'package:rikin_interview_14_02/presentation/dashboard/dashboard_cubit.dart';
+import 'package:rikin_interview_14_02/presentation/product_detail/product_detail_cubit.dart';
 import 'package:rikin_interview_14_02/presentation/user/login/login_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -22,11 +23,11 @@ Future<void> initializeDependencies() async {
   getIt
       .registerLazySingleton<UserRepository>(() => UserRepositoryImpl(getIt()));
 
-  // Use cases
-  getIt.registerLazySingleton(() => GetDashboardUseCase(getIt()));
-  // getIt.registerLazySingleton(() => GetLoginUseCase(getIt()));
-
   // Blocs
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
-  getIt.registerFactory<DashboardCubit>(() => DashboardCubit(getIt(), getIt()));
+  getIt.registerFactory<DashboardCubit>(() => DashboardCubit(
+        getIt(),
+      ));
+  getIt.registerFactory<ProductDetailCubit>(() => ProductDetailCubit(getIt()));
+  getIt.registerFactory<CartDetailCubit>(() => CartDetailCubit());
 }

@@ -1,47 +1,46 @@
 import 'dart:async';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rikin_interview_14_02/core/resources/api_response.dart';
 import 'package:rikin_interview_14_02/core/resources/ui_state.dart';
-import 'package:rikin_interview_14_02/domain/entities/response/LocationResponse/location_response.dart';
-import 'package:rikin_interview_14_02/domain/entities/response/LocationResponse/value.dart';
+import 'package:rikin_interview_14_02/domain/models/response/base_response/base_response.dart';
+import 'package:rikin_interview_14_02/domain/models/response/product_list_response/product_list_response.dart';
 import 'package:rikin_interview_14_02/domain/repository/user_repository.dart';
-import 'package:rikin_interview_14_02/domain/usercases/get_dashboard_use_case.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'dashboard_state.dart';
 
 class DashboardCubit extends Cubit<DashboardState> {
-  DashboardCubit(this._getArticleUseCase, this._userRepository)
-      : super(DashboardState()) {
-    getLocationList();
+  DashboardCubit(this._userRepository) : super(DashboardState()) {
+    getProductList();
   }
-  final GetDashboardUseCase _getArticleUseCase;
+  // final GetDashboardUseCase _getProductListUseCase;
   final UserRepository _userRepository;
 
-  Future<void> getLocationList({String? query}) async {
-    emit(state.copyWith(uiLocationState: const UiState.loading()));
-    ApiResponse apiResponse = await _getArticleUseCase(params: query);
+  Future<void> getProductList({String? query}) async {
+    emit(state.copyWith(uiProductListState: const UiState.loading()));
+    ApiResponse<BaseResponse<List<ProductListResponse>>> apiResponse =
+        await _userRepository.getProductList();
     await Future<void>.delayed(const Duration(milliseconds: 50));
-    if (apiResponse is ApiResponseSuccess) {
-      LocationResponse? locationRespObj = apiResponse.value;
-      if (locationRespObj != null) {
-        List<Value>? locationRespList = locationRespObj.value;
-        if (locationRespList != null && locationRespList.isNotEmpty) {
+    if (apiResponse
+        is ApiResponseSuccess<BaseResponse<List<ProductListResponse>>>) {
+      BaseResponse<List<ProductListResponse>> baseResponse = apiResponse.value;
+      if (baseResponse.status == 1) {
+        final productList = baseResponse.data ?? [];
+        if (productList.isNotEmpty) {
           emit(state.copyWith(
-              uiLocationState: UiState.success(data: locationRespList)));
+              uiProductListState: UiState.success(data: productList)));
         } else {
-          emit(state.copyWith(uiLocationState: const UiState.empty()));
+          emit(state.copyWith(uiProductListState: const UiState.empty()));
         }
       } else {
         emit(state.copyWith(
-            uiLocationState:
-                const UiState.failure(reason: 'Something went wrong')));
+            uiProductListState: UiState.failure(reason: baseResponse.message)));
       }
     }
 
     if (apiResponse is ApiResponseError) {
       emit(state.copyWith(
-          uiLocationState: UiState.failure(reason: apiResponse.message)));
+          uiProductListState: UiState.failure(reason: apiResponse.message)));
     }
   }
 

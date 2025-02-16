@@ -31,10 +31,9 @@
     */
   {
     // "__path": "/lib/data/model/request",
-    "__path": "/lib/domain/entities/response/LocationResponse",
+    "__path": "/lib/domain/models/response/LocationResponse",
     "__className": "LocationResponse",
     "value": [
-    
       {
         "location": {
           "suggestion": "Girgaon, Mumbai City, Maharashtra",

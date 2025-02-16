@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rikin_interview_14_02/core/utils/extension/text_style_extensions.dart';
+import 'package:rikin_interview_14_02/core/utils/extension/widget_extension.dart';
 import 'package:rikin_interview_14_02/presentation/themes/app_colors.dart';
 import 'package:rikin_interview_14_02/presentation/themes/app_css.dart';
 import 'package:rikin_interview_14_02/presentation/widget/Text/text_widget.dart';
@@ -34,13 +35,13 @@ class NoDataFoundWidget extends StatelessWidget {
           // if (imagePath != null) ...[
           //   SvgPicture.asset(imagePath!),
           // ],
-          const SizedBox(height: 27),
+          27.height,
           Text(
             message ?? 'No Data Found.',
             textAlign: TextAlign.center,
             style: AppCss.circularStdW40016.textColor(MyColors.color000000),
           ),
-          const SizedBox(height: 5),
+          5.height,
           if (subDesc != null) ...[
             TextWidget(
               subDesc,
@@ -48,7 +49,7 @@ class NoDataFoundWidget extends StatelessWidget {
               style: AppCss.circularStdW50014.textColor(MyColors.color000000),
             ),
           ],
-          const SizedBox(height: 10),
+          10.height,
           if (btnRetry != null) ...[
             OutlinedButtonWidget(
               onPressed: btnRetry,

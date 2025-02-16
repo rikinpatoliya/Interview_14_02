@@ -18,34 +18,25 @@ class _UserApiServices implements UserApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<LocationResponse> getNewsArticles({
-    String? suggest,
-    int? limit,
-    String? searchFields,
-  }) async {
+  Future<String> getProductList() async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'suggest': suggest,
-      r'limit': limit,
-      r'searchFields': searchFields,
-    };
-    queryParameters.removeWhere((k, v) => v == null);
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<LocationResponse>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+    final _options = _setStreamType<String>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'autocomplete',
+            'api/category_productV1',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late LocationResponse _value;
+    final _result = await _dio.fetch<String>(_options);
+    late String _value;
     try {
-      _value = LocationResponse.fromJson(_result.data!);
+      _value = _result.data!;
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -54,25 +45,55 @@ class _UserApiServices implements UserApiServices {
   }
 
   @override
-  Future<LocationResponse> getProductList() async {
+  Future<String> getProductDetail(String productId) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'Product_id': productId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<LocationResponse>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+    final _options = _setStreamType<String>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'category_productV1',
+            'api/category_productV1',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late LocationResponse _value;
+    final _result = await _dio.fetch<String>(_options);
+    late String _value;
     try {
-      _value = LocationResponse.fromJson(_result.data!);
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<String> addToCart(String productId, int qty) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'Product_id': productId,
+      r'qty': qty,
+    };
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<String>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'mobile_api/AddToCart',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<String>(_options);
+    late String _value;
+    try {
+      _value = _result.data!;
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:rikin_interview_14_02/config/routes/app_router.dart';
 import 'package:rikin_interview_14_02/core/resources/ui_state.dart';
 import 'package:rikin_interview_14_02/core/utils/extension/text_style_extensions.dart';
+import 'package:rikin_interview_14_02/core/utils/extension/widget_extension.dart';
+import 'package:rikin_interview_14_02/core/utils/share_prefs.dart';
 import 'package:rikin_interview_14_02/core/utils/validator.dart';
 import 'package:rikin_interview_14_02/dependency_container.dart';
 import 'package:rikin_interview_14_02/presentation/themes/app_colors.dart';
@@ -32,12 +34,7 @@ class LoginPage extends StatelessWidget {
               // var loginCubit = context.read<LoginCubit>();
               state.uiState.mapOrNull(
                 success: (value) {
-                  /*  if (value.data != null) {
-                    context.pushRoute(VerifyCodeRoute(contactData: loginCubit.usernameCtrl.text));
-                  } else {
-                    context.router.pushAndPopUntil(const DashboardRoute(), predicate: (route) => false);
-                  } */
-                  // context.router.popUntilRouteWithName(RoutesNames.dashboardPage);
+                  sharedPrefs.setIsLoggedIn(true);
                   context.router.pushAndPopUntil(const DashboardRoute(),
                       predicate: (route) => false);
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -66,9 +63,9 @@ class LoginPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 50),
+          50.height,
           _buildGreeting(),
-          const SizedBox(height: 50),
+          50.height,
           _buildLoginForm(context, state),
         ],
       ),
@@ -93,7 +90,7 @@ class LoginPage extends StatelessWidget {
               value,
             ),
           ),
-          const SizedBox(height: 20),
+          20.height,
           InputTextFormField(
             hintText: 'Password',
             obscureText: true,
@@ -133,7 +130,7 @@ class LoginPage extends StatelessWidget {
           //     const SizedBox(height: 3),
           //   ]
           // ],
-          const SizedBox(height: 45),
+          45.height,
           if (state.uiState is Loading) ...[
             const LoadingScreenWidget()
           ] else ...[

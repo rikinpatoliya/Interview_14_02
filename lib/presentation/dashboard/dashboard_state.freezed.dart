@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DashboardState {
-  UiState<List<Value>> get uiLocationState =>
+  UiState<List<ProductListResponse>> get uiProductListState =>
       throw _privateConstructorUsedError;
   UiState<String> get uiLogoutState => throw _privateConstructorUsedError;
 
@@ -34,9 +34,10 @@ abstract class $DashboardStateCopyWith<$Res> {
       _$DashboardStateCopyWithImpl<$Res, DashboardState>;
   @useResult
   $Res call(
-      {UiState<List<Value>> uiLocationState, UiState<String> uiLogoutState});
+      {UiState<List<ProductListResponse>> uiProductListState,
+      UiState<String> uiLogoutState});
 
-  $UiStateCopyWith<List<Value>, $Res> get uiLocationState;
+  $UiStateCopyWith<List<ProductListResponse>, $Res> get uiProductListState;
   $UiStateCopyWith<String, $Res> get uiLogoutState;
 }
 
@@ -55,14 +56,14 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uiLocationState = null,
+    Object? uiProductListState = null,
     Object? uiLogoutState = null,
   }) {
     return _then(_value.copyWith(
-      uiLocationState: null == uiLocationState
-          ? _value.uiLocationState
-          : uiLocationState // ignore: cast_nullable_to_non_nullable
-              as UiState<List<Value>>,
+      uiProductListState: null == uiProductListState
+          ? _value.uiProductListState
+          : uiProductListState // ignore: cast_nullable_to_non_nullable
+              as UiState<List<ProductListResponse>>,
       uiLogoutState: null == uiLogoutState
           ? _value.uiLogoutState
           : uiLogoutState // ignore: cast_nullable_to_non_nullable
@@ -74,9 +75,10 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UiStateCopyWith<List<Value>, $Res> get uiLocationState {
-    return $UiStateCopyWith<List<Value>, $Res>(_value.uiLocationState, (value) {
-      return _then(_value.copyWith(uiLocationState: value) as $Val);
+  $UiStateCopyWith<List<ProductListResponse>, $Res> get uiProductListState {
+    return $UiStateCopyWith<List<ProductListResponse>, $Res>(
+        _value.uiProductListState, (value) {
+      return _then(_value.copyWith(uiProductListState: value) as $Val);
     });
   }
 
@@ -100,10 +102,11 @@ abstract class _$$DashboardStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {UiState<List<Value>> uiLocationState, UiState<String> uiLogoutState});
+      {UiState<List<ProductListResponse>> uiProductListState,
+      UiState<String> uiLogoutState});
 
   @override
-  $UiStateCopyWith<List<Value>, $Res> get uiLocationState;
+  $UiStateCopyWith<List<ProductListResponse>, $Res> get uiProductListState;
   @override
   $UiStateCopyWith<String, $Res> get uiLogoutState;
 }
@@ -121,14 +124,14 @@ class __$$DashboardStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uiLocationState = null,
+    Object? uiProductListState = null,
     Object? uiLogoutState = null,
   }) {
     return _then(_$DashboardStateImpl(
-      uiLocationState: null == uiLocationState
-          ? _value.uiLocationState
-          : uiLocationState // ignore: cast_nullable_to_non_nullable
-              as UiState<List<Value>>,
+      uiProductListState: null == uiProductListState
+          ? _value.uiProductListState
+          : uiProductListState // ignore: cast_nullable_to_non_nullable
+              as UiState<List<ProductListResponse>>,
       uiLogoutState: null == uiLogoutState
           ? _value.uiLogoutState
           : uiLogoutState // ignore: cast_nullable_to_non_nullable
@@ -141,19 +144,19 @@ class __$$DashboardStateImplCopyWithImpl<$Res>
 
 class _$DashboardStateImpl implements _DashboardState {
   _$DashboardStateImpl(
-      {this.uiLocationState = const UiState.idle(),
+      {this.uiProductListState = const UiState.idle(),
       this.uiLogoutState = const UiState.idle()});
 
   @override
   @JsonKey()
-  final UiState<List<Value>> uiLocationState;
+  final UiState<List<ProductListResponse>> uiProductListState;
   @override
   @JsonKey()
   final UiState<String> uiLogoutState;
 
   @override
   String toString() {
-    return 'DashboardState(uiLocationState: $uiLocationState, uiLogoutState: $uiLogoutState)';
+    return 'DashboardState(uiProductListState: $uiProductListState, uiLogoutState: $uiLogoutState)';
   }
 
   @override
@@ -161,14 +164,15 @@ class _$DashboardStateImpl implements _DashboardState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DashboardStateImpl &&
-            (identical(other.uiLocationState, uiLocationState) ||
-                other.uiLocationState == uiLocationState) &&
+            (identical(other.uiProductListState, uiProductListState) ||
+                other.uiProductListState == uiProductListState) &&
             (identical(other.uiLogoutState, uiLogoutState) ||
                 other.uiLogoutState == uiLogoutState));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, uiLocationState, uiLogoutState);
+  int get hashCode =>
+      Object.hash(runtimeType, uiProductListState, uiLogoutState);
 
   /// Create a copy of DashboardState
   /// with the given fields replaced by the non-null parameter values.
@@ -182,11 +186,11 @@ class _$DashboardStateImpl implements _DashboardState {
 
 abstract class _DashboardState implements DashboardState {
   factory _DashboardState(
-      {final UiState<List<Value>> uiLocationState,
+      {final UiState<List<ProductListResponse>> uiProductListState,
       final UiState<String> uiLogoutState}) = _$DashboardStateImpl;
 
   @override
-  UiState<List<Value>> get uiLocationState;
+  UiState<List<ProductListResponse>> get uiProductListState;
   @override
   UiState<String> get uiLogoutState;
 

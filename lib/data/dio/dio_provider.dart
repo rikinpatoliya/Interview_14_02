@@ -4,7 +4,7 @@ import 'awesome_dio_interceptor.dart';
 import 'header_interceptor.dart';
 
 class DioProvider {
-  static const String baseUrl = 'https://lorriservice.azurefd.net/api/';
+  static const String baseUrl = 'https://theflowerhub.co.nz/';
 
   static Dio? _instance;
 

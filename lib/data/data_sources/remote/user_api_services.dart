@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart' hide Headers;
-import 'package:rikin_interview_14_02/domain/entities/response/LocationResponse/location_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'user_api_services.g.dart';
@@ -8,13 +7,17 @@ part 'user_api_services.g.dart';
 abstract class UserApiServices {
   factory UserApiServices({required Dio dio}) => _UserApiServices(dio);
 
-  @GET('autocomplete')
-  Future<LocationResponse> getNewsArticles({
-    @Query("suggest") String? suggest,
-    @Query("limit") int? limit,
-    @Query("searchFields") String? searchFields,
-  });
+  @POST('api/category_productV1')
+  Future<String> getProductList();
 
-  @GET('category_productV1')
-  Future<LocationResponse> getProductList();
+  @POST('api/category_productV1')
+  Future<String> getProductDetail(
+    @Query('Product_id') String productId,
+  );
+
+  @POST('mobile_api/AddToCart')
+  Future<String> addToCart(
+    @Query('Product_id') String productId,
+    @Query('qty') int qty,
+  );
 }
